@@ -317,16 +317,16 @@ header .h_btn a i, header .search_form {
     z-index: 10;
     text-align: right;
     width: 40%;
-	color: #111;
-	opacity: 0;
-	padding-right: 2%;
-	animation-name:fade-in1;
-	animation-duration:10s;
-	animation-timing-function: ease-out; 
-	animation-delay:2s; 
-	animation-iteration-count:1; 
-	animation-direction:normal; 
-	animation-fill-mode: forwards; 
+    color: #111;
+    opacity: 0;
+    padding-right: 2%;
+    animation-name:fade-in1;
+    animation-duration:10s;
+    animation-timing-function: ease-out; 
+    animation-delay:2s; 
+    animation-iteration-count:1; 
+    animation-direction:normal; 
+    animation-fill-mode: forwards; 
   }
 
   @keyframes fade-in1 {
@@ -450,7 +450,6 @@ header .h_btn a i, header .search_form {
   color: #999;
   padding-right: 20px;
 }
-
 
 /*
 コンテンツ大ボタン
@@ -934,6 +933,16 @@ FAQ
   top: 50px;
 }
 
+.pick_up #content_title {
+  font-size: 35px;
+  position: absolute;
+  text-align: left;
+  left: 20px;
+  top: -50px;
+  font-family: "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "Sawarabi Mincho", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+
+}
+
 .pick_up .sc_btm a {
   line-height: 50px;
   color: #333;
@@ -978,17 +987,20 @@ FAQ
     width: 100%;
     padding: 20px;
     flex-wrap: wrap;
-	justify-content: space-between;
-	display: grid;
-	gap: 10px;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  	justify-content: space-between;
+    display: grid;
+    grid-auto-columns: 3;
+    justify-content: left; 
+    
+	  gap: 10px;
+	  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
 }
 
 .pick_up ul li {
     box-sizing: border-box;
-	position: relative;
-	background: #edf;
-	text-align: center;
+    position: relative;
+    background: #edf;
+    text-align: center;
 }
 
 .pick_up ul li a {
@@ -1104,13 +1116,13 @@ a .digest_text {
 }
 
 a .digest_date {
-	color: #FFF;
-	font-size: 12px;
+	color: #000;
+	font-size: 8px;
 	text-decoration: none;
 	text-align: right;
 	display: block;
-	width: 30%;
-	margin-right: 5px;
+	width: 35%;
+	margin-right: 1px;
 	position: absolute;
 	top: 25%;
 	right: 0%;
@@ -1125,7 +1137,7 @@ a .digest_likes {
 	text-align: right;
 	display: block;
 	width: 30%;
-	margin-right: 5px;
+	margin-right: 1px;
 	position: absolute;
 	top: 35%;
 	right: 0%;
@@ -1251,19 +1263,68 @@ ul.works_list li a:hover {
   color: #000;
 }
 
+/*
+ページネーション
+-------------------------------------------*/
+
+.pagination {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin-top: 10px;
+}
+.pagination li {
+  display: inline;
+  text-align: center;
+}
+.pagination a {
+  float: left;
+  display: block;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 5px 12px;
+  color: #fff;
+  margin-left: -1px;
+  border: 1px solid transparent;
+  line-height: 1.5;
+}
+.pagination a.active {
+  cursor: default;
+}
+.pagination a:active {
+  outline: none;
+}
+
+.modal-3 a {
+  margin-left: 3px;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+.modal-3 a:hover {
+  background-color: #4DAD16;
+}
+.modal-3 a.active, .modal-3 a:active {
+  background-color: #37B247;
+}
+
 @media screen and (min-width:960px) {
+  /*
+ヘッダー
+-------------------------------------------*/
   body .sm-slider {
     background-image: url("/static/BlogManager/img/home_background.jpg");
-    background-size: 100%;
+    background-size: 100% 100%;
     /* background-repeat: no-repeat; */
     font-size: 16px;
   }
   .sm-slider, .sm-slider::after {
 	top: 100px !important;
   }
-  /*
-ヘッダー
--------------------------------------------*/
   header {
     height: 140px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 3px 0px;
@@ -1749,9 +1810,13 @@ PCグローバルナビ
   /*
 ヘッダー
 -------------------------------------------*/
-  .sm-slider, .sm-slider::after {
-    top: 50px !important;
+  body .sm-slider {
+    background-image: url("/static/BlogManager/img/home_background.jpg");
+    background-size: 100% 100%;
+    /* background-repeat: no-repeat; */
+    font-size: 16px;
   }
+
   header {
     height: 52px;
   }
@@ -1793,9 +1858,46 @@ PCグローバルナビ
 /*
 トップ下部ピックアップ
 -------------------------------------------*/
-  .pick_up ul li {
-      width: 45%;
-      margin: 12px;
+  .pick_up {
+    top: 150px;
+  }
+
+  .pick_up ul {
+    grid-auto-columns: 3;
+	  grid-template-columns: repeat(auto-fit, minmax(120px, 240px));
+    justify-content: center; 
+  }
+
+.pick_up #content_title {
+  font-size: 30px;
+}
+
+.pick_up ul li a img {
+    height: 120px;
+  }
+
+  a .btn_check {
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 5px;
+    margin-left: -10px;
+    top: 70%;
+  }
+
+  #index_top #top_catch {
+      top: 70px;
+      width: 40%;
+  }
+  
+  #index_top #top_catch h2 {
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-family: "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "Sawarabi Mincho", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+    font-weight: normal;
+  }
+
+  #index_top #top_catch p {
+    font-size: 9px;
   }
 
   /*
@@ -1851,17 +1953,17 @@ PCグローバルナビ
   header .search_form {
     width: 100px;
     font-size: 8px;
-	right: 110px;
-	height: 10px
+    right: 110px;
+    height: 10px
   }
   header .search_form span, header .h_btn a span {
     display: none;
   }
   header .search_form .form-control {
-	width: 30%;
-	padding: .375rem .75rem;
-	font-size: 1em;
-	line-height: 1.5;
+    width: 30%;
+    padding: .375rem .75rem;
+    font-size: 1em;
+    line-height: 1.5;
   }
   header .search_btn {
     padding: .275rem .250rem;
@@ -1917,12 +2019,89 @@ PCグローバルナビ
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
+  #index_top #top_catch {
+    top: 60px;
+    width: 80%;
+  }
+
+  #index_top #top_catch h2 {
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-family: "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "Sawarabi Mincho", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+    font-weight: normal;
+  }
+
   .pick_up ul {
     padding: 15px;
+    grid-template-columns: repeat(2, minmax(120px, 240px));
   }
+
   .pick_up ul li {
-    width: 40%;
+    width: 100%;
+    height: 100px;
   }
+
+  .pick_up ul li a img {
+    height: 100px;
+  }
+
+  a .digest_title {
+    font-size: 12px;
+    line-height: 25px;
+  }
+    
+  a:hover .digest_title {
+    font-size: 14px;
+  }
+
+  a .digest_text {
+    font-size: 10px;
+    line-height: 20px;
+    width: 100%;
+    margin-left: 0px;
+    top: 25%;
+  }
+
+  a .digest_date {
+    font-size: 8px;
+    text-align: left;
+    width: 80px;
+    margin-right: 1px;
+    top: 65px;
+    left: 0%;
+  }
+
+  a .digest_likes {
+    font-size: 12px;
+    text-align: left;
+    width: 80px;
+    margin-right: 1px;
+    top: 80px;
+    left: 0%;
+  }
+
+  a .btn_check {
+    font-size: 10px;
+    line-height: 30px;
+    left: 90px;
+    margin: 0;
+    top: 65px;
+    width: 120px;
+  }
+
+  #index_top #top_catch p {
+    font-size: 7px;
+  }
+
+  .pick_up {
+    top: 130px;
+  }
+
+  .pick_up #content_title {
+    font-size: 20px;
+    top: -30px;
+  }
+
   .balloon {
     top: -35px;
     margin-left: -25px;
@@ -1931,13 +2110,32 @@ PCグローバルナビ
     line-height: 50px;
     font-size: 14px;
   }
-  a .btn_check {
-    width: 80%;
-    margin-left: -40%;
-  }
 }
 
 @media screen and (max-width:460px) {
+/*
+トップ下部ピックアップ
+-------------------------------------------*/
+  .pick_up ul {
+    grid-template-columns: repeat(1, minmax(120px, 240px));
+  }
+
+  #index_top #top_catch p {
+    font-size: 7px;
+  }
+
+  .pick_up {
+    top: 130px;
+  }
+
+  .pick_up #content_title {
+    font-size: 15px;
+    top: -25px
+  }
+
+  /*
+その他
+-------------------------------------------*/
   input, textarea {
     max-width: 300px !important;
   }
@@ -1951,9 +2149,6 @@ PCグローバルナビ
   .content table.table_01 th {
     background-color: #F6F6F6;
   }
-  #index_top #top_catch h2 {
-    font-size: 30px;
-  }
   #sub_top {
     font-size: 16px;
   }
@@ -1962,18 +2157,6 @@ PCグローバルナビ
   }
   .content h2 span {
     font-size: 12px;
-  }
-  a .btn_check {
-    font-size: 12px;
-    line-height: 30px;
-  }
-  a .btn_check i {
-    padding-right: 5px;
-    padding-left: 2px;
-  }
-  a:hover .btn_check i {
-    padding-right: 2px;
-    padding-left: 5px;
   }
   ul.works_list li {
     width: 98%;
@@ -2034,6 +2217,7 @@ PCグローバルナビ
   font-size: 20px;
   color: #CA28B1;
 }
+
 
 @media screen and (prefers-reduced-motion:reduce) {
   .form-control {

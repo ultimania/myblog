@@ -2,26 +2,63 @@ from django.shortcuts import render
 from django.views import generic
 from .models import TopicsTr
 from .forms import SearchForm
+from .utils import *
+
+class ListView(generic.ListView):
+    model = TopicsTr
+    context_object_name = 'model_data'
+    template_name = 'BlogManager/list.html'
+    paginate_by = 1
+
+    def get_queryset(self):
+        queryset = TopicsTr.objects.select_related().all().order_by('-created_at')
+        for query in queryset:
+            query.text = extractDigest(query.text, 40)
+            query.created_at = query.created_at.date()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = "feivs2019's blog | 記事一覧"
+        context['keywords'] = "feivs2019,blog,Django,Python"
+        context['content_title'] = "記事一覧"
+
+        default_data = {
+                        'search_words': '', 
+                        }
+        search_form = SearchForm(initial=default_data)
+        context['search_form'] = search_form
+
+        return context
+
 
 class HomeView(generic.ListView):
     model = ''
     context_object_name = 'model_data'
     template_name = 'BlogManager/index.html'
-    get_count = 10
-    # paginate_by = 30
-
+    get_count = 9
+    paginate_by = 30
 
     def get_queryset(self):
         queryset = TopicsTr.objects.select_related().all().order_by('-created_at')[:self.get_count]
-        # for query in queryset:
-            # query.text = extractDigest(query.text)
         return queryset
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = "feivs2019's blog"
         context['keywords'] = "feivs2019,blog,Django,Python"
+        context['content_title'] = "最新記事"
+
+        # 記事ダイジェストの取得
+        digests = []
+        for query in self.get_queryset():
+            digests.append({
+                'title'         : query.title
+                ,'text'          : extractDigest(query.text, 40)
+                ,'created_at'    : query.created_at.date()
+                ,'likes'         : query.likes
+            })
+        context['digests'] = digests
 
         default_data = {
                         'search_words': '', 

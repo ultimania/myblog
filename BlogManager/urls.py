@@ -4,6 +4,7 @@ from BlogManager import views
 urlpatterns = [
     path('', views.HomeView.as_view()),
     path('home/', views.HomeView.as_view(), name='home'),
-    path('search/', views.HomeView.as_view(), name='search'),
+    path('search/', views.SearchView.as_view(), name='search'),
     path('list/', views.ListView.as_view(), name='list'),
+    path('drafts/', views.DraftsView.as_view(), name='drafts'),
 ]

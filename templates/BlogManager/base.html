@@ -57,13 +57,13 @@
 <nav id="g_navi">
     <ul class="navi_base">
         <li>
-            <a href="faq.html">HOME</a>
+            <a href="{% url 'blog:home' %}">HOME</a>
         </li>
         <li>
             <a class="ac_menu">TOPICS</a>
             <div class="ac_list">
                 <ul>
-                    <li><a href="works.html">記事一覧</a></li>
+                    <li><a href="{% url 'blog:list' %}">記事一覧</a></li>
                 </ul>
             </div>
         </li>
@@ -78,11 +78,11 @@
             <div class="ac_list">
                 <ul>
                 {% if user.is_authenticated %}
-                    <li><a href="#">記事の投稿</a></li>
-                    <li><a href="#">下書き一覧</a></li>
-                    <li><a href="#">ログアウト</a></li>
+                    <li><a href="{% url 'blog:post' %}">記事の投稿</a></li>
+                    <li><a href="{% url 'blog:drafts' %}">下書き一覧</a></li>
+                    <li><a href="{% url 'accounts:logout' %}">ログアウト</a></li>
                 {% else %}
-                    <li><a href="#">ログイン</a></li>
+                    <li><a href="{% url 'accounts:login' %}">ログイン</a></li>
                 {% endif %}
                 </ul>
             </div>

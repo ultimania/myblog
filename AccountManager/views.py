@@ -19,4 +19,12 @@ class Login(LoginView):
 
 class Logout(LoginRequiredMixin, LogoutView):
     """ログアウトページ"""
+    form_class = LoginForm
     template_name = 'registration/logout.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'search_form': SearchForm,
+        })
+        return context

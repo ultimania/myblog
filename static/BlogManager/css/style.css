@@ -174,7 +174,7 @@ header .search_btn {
 	text-decoration: none;
 	cursor: pointer
 }
-  
+
 .search_btn.focus, .search_btn:focus {
   outline: 0;
   box-shadow: 0 0 0 .2rem rgba(0, 0, 0, 100)
@@ -292,6 +292,116 @@ header .h_btn a i, header .search_form {
   -ms-text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
+
+/*
+ログインフォーム ここから
+*/
+.form_area {
+  top: 10%;
+  right: 10%;
+  width: 30%;
+  background-color: rgba(200, 200, 200, 0.5);
+  border: #008C69;
+  padding: 40px 40px 100px 40px;
+  margin: 5% 10% 10%;
+  font-family: 'Roboto', sans-serif;  
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.form-group .login-form-control {
+  font-weight: 500;
+  width: calc(100% - 2vw);
+  height: 27px;
+  padding-left: 0.5vw;
+  background-color: transparent;
+  color: white;
+  position: static;
+  bottom: 0px;
+  outline: none;
+  border-style: solid;
+  border-color: #E3E7EA;
+  border-width: 0px 0px 2px 0px;
+  font-size: 20px;
+  -webkit-transition: border-color 0.45s linear;
+  transition: border-color 0.45s linear;
+}
+
+.form-group > input.login-form-control:focus {
+  border-color: #B2FF59;
+}
+
+.form-group .label {
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+  color: #C0C0C0;
+  padding-left: 0.5vw;
+  bottom: 3px;
+  font-size: 20px;
+  font-weight: 300;
+  -webkit-transition-property: opacity bottom font-size;
+  transition-property: opacity bottom font-size;
+  -webkit-transition-duration: 0.45s;
+  transition-duration: 0.45s;
+  -webkit-transition-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+  transition-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+.form-group .error {
+  position: absolute;
+  margin-top: 48px;
+  width: 100%;
+  color: #e74c3c;
+  text-align: center;
+}
+
+.form-group > input.login-form-control:focus ~ .label, .texform_areatBox > input.login-form-control:not([value=""]) ~ .label {
+  opacity: 1;
+  z-index: 1;
+  bottom: 55%;
+  font-size: 12px;
+}
+
+.form-group > input.login-form-control:focus ~ .label {
+  color: #B2FF59;
+}
+
+.form-group ::-webkit-input-placeholder {
+  color: #2B2B2B;
+  font-size: 20px;
+  font-weight: 200;
+  font-family: 'Roboto', sans-serif;
+}
+
+.error_message {
+  color: #FF0000;
+  font-size: 20px;
+  margin-top: 5%;
+}
+
+.form-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #71c159;
+    letter-spacing: 1px;
+    border: 1px solid #71c159;
+    width: 100%;
+    padding: 10px;
+}
+
+.form-btn:hover {
+  color: #FFF;
+  background-color: #71c159;
+  border: 1px solid #FFF;
+  cursor: pointer;
+  transition: 0.2s linear;
+}
+
+/*
+ログインフォーム ここまで
+*/
 
 #index_top {
   height: 100%;

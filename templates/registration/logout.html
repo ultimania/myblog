@@ -1,0 +1,14 @@
+{% extends 'BlogManager/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div id="index_top">
+    <div id="top_catch">
+        {% include 'BlogManager/catch.html' %}
+    </div>
+    <div class="pick_up effect">
+        <div id="content_title"> ログアウトしました </div>
+    </div>
+</div>
+{% endblock %}

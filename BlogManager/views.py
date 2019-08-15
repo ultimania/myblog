@@ -119,7 +119,7 @@ class SearchView(generic.ListView):
             if len(text) != 0 and text[0]:
                 condition_text = Q(text__contains=text)
             # 記事ダイジェストの取得
-            queryset = TopicsTr.objects.select_related().filter(condition_text).order_by('-created_at')
+            queryset = TopicsTr.objects.select_related().filter(condition_text).filter(isdraft=False).order_by('-likes')
             for query in queryset:
                 query.text = extractDigest(query.text, 40)
                 query.created_at = query.created_at.date()

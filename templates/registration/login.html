@@ -1,0 +1,49 @@
+{% extends 'BlogManager/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div id="index_top">
+    <div id="top_catch">
+        {% include 'BlogManager/catch.html' %}
+    </div>
+    <div class="pick_up effect">
+        <div id="content_title"> ユーザログイン </div>
+        {% if form.errors %}
+        <div class="error_message">
+            <p>Your username and password didn't match. Please try again.</p>
+        </div>
+        {% endif %}
+
+        {% if next %}
+        <div class="error_message">
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="form_area">
+            <div class="container">
+                <form method="post" action="{% url 'accounts:login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.username|add_class:"form-control"|attr:"placeholder:ユーザ名" }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password|add_class:"form-control"|attr:"placeholder:パスワード" }}
+                    </div>
+                <input type="submit" value="login" />
+                <input type="hidden" name="next" value="{{ next }}" />
+                </form>
+
+            {# Assumes you setup the password_reset view in your URLconf #}
+            {# <p><a href="{% url 'password_reset' %}">Lost password?</a></p> #}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

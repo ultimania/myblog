@@ -294,6 +294,44 @@ header .h_btn a i, header .search_form {
 }
 
 /*
+投稿フォーム ここから
+*/
+#content.form_area {
+  height: 80%;
+  width: 80%;
+  background-color: rgba(200, 200, 200, 0.5);
+  border: #008C69;
+  padding: 4%;
+  margin: 4%;
+  font-family: 'Roboto', sans-serif;
+  position: static;
+}
+
+#content.form_area form {
+  position: static;
+  height: 90%;
+}
+
+#content.form_area input#id_title {
+  width: 100%;
+  line-height: 30px;
+  font-size: 16px;
+}
+
+#text.form-group.post {
+  width: 100%;
+  height: 80%;
+  font-size: 16px;
+}
+
+#content.form_area textarea#id_text {
+  width: 80%;
+  height: 50%;
+  font-size: 16px;
+  position: absolute;
+}
+
+/*
 ログインフォーム ここから
 */
 .form_area {
@@ -408,6 +446,13 @@ header .h_btn a i, header .search_form {
   width: 100%;
   position: relative;
   overflow: hidden;
+}
+
+#index_top.post {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: auto;
 }
 
 #index_02 {
@@ -1041,6 +1086,11 @@ FAQ
   position: absolute;
   background-color: rgba(0, 126, 108, 0.5);
   top: 50px;
+}
+
+.post .pick_up {
+  height: 120%;
+  max-height: 1000px;
 }
 
 .pick_up #content_title {

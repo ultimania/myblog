@@ -1,10 +1,61 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import TopicsTr
-from .forms import SearchForm
+from .models import *
+from .forms import *
 from .utils import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.urls import reverse_lazy
+
+class UploadView(LoginRequiredMixin, generic.CreateView):
+    """ファイルモデルのアップロードビュー POST専用"""
+    model = MediaTr
+    form_class = UploadForm
+    template_name = 'BlogManager/upload.html'
+    success_url = reverse_lazy('blog:post')
+    
+
+class TopicView(generic.DetailView):
+    model = TopicsTr
+    context_object_name = 'model_data'
+    template_name = 'BlogManager/topic.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        topic_title = context['object'].title
+        context['page_title'] = "feivs2019's blog | " + topic_title
+        context['keywords'] = "feivs2019,blog,Django,Python"
+        # 検索フォームの取得
+        default_data = {
+                        'search_words': '', 
+                        }
+        search_form = SearchForm(initial=default_data)
+        context['search_form'] = search_form
+        return context
+
+
+class PostView(LoginRequiredMixin, generic.CreateView):
+    model = TopicsTr
+    form_class = PostForm
+    context_object_name = 'model_data'
+    template_name = 'BlogManager/post.html'
+    success_url = "/blog/list"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = "feivs2019's blog | 記事を書く"
+        context['keywords'] = "feivs2019,blog,Django,Python"
+        context['content_title'] = "記事を書く"
+        # 検索フォームの取得
+        default_data = {
+                        'search_words': '', 
+                        }
+        search_form = SearchForm(initial=default_data)
+        context['search_form'] = search_form
+        # アップロードフォームの取得
+        context['upload_form'] = UploadForm()
+        return context
+
 
 class DraftsView(LoginRequiredMixin, generic.ListView):
 # class DraftsView(generic.ListView):

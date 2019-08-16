@@ -18,7 +18,6 @@ class TopicsTr(models.Model):
 # メディア情報
 class MediaTr(models.Model):
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    topic_id        = models.ForeignKey(TopicsTr, to_field='id', on_delete=models.CASCADE)
     file            = models.FileField(
                         upload_to='uploads/%Y/%m/%d/',
                         verbose_name='画像ファイル',
@@ -28,7 +27,7 @@ class MediaTr(models.Model):
 # コメント情報
 class CommentTr(models.Model):
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    topic_id        = models.ForeignKey(TopicsTr, to_field='id', on_delete=models.CASCADE)
+    topic           = models.ForeignKey(TopicsTr, to_field='id', on_delete=models.CASCADE)
     author          = models.CharField(max_length=128, default='no title', null=False)
     text            = models.TextField(null=True)
     created_at      = models.DateTimeField(default=timezone.now, null=False)

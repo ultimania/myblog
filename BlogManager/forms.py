@@ -6,7 +6,7 @@ class UploadForm(forms.ModelForm):
 
     class Meta:
         model = MediaTr
-        fields = '__all__'
+        fields = ('file',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -30,7 +30,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = TopicsTr
-        fields = ("title","text")
+        fields = ("title","text",)
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

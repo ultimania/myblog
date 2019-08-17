@@ -74,7 +74,6 @@ class UploadView(LoginRequiredMixin, generic.CreateView):
     """ファイルモデルのアップロードビュー POST専用"""
     model = MediaTr
     form_class = UploadForm
-    template_name = 'BlogManager/upload.html'
     success_url = reverse_lazy('blog:post')
     
 

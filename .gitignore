@@ -3,3 +3,5 @@
 !__init__.py
 *ipynb*
 media/*
+myblog/local_settings.py
+db.sqlite3

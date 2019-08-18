@@ -1,4 +1,6 @@
 import os
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
 
 DEBUG = False
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))

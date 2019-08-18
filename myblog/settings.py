@@ -1,11 +1,11 @@
 import os
 import dj_database_url
 
+# base settings
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-DEBUG = False
-
 SECRET_KEY = '_!*7$ym_1wp4y&q5z&a(j4)7%0pr+hr$*g*v_)lzm#+vk_wj_l'
+ROOT_URLCONF = 'myblog.urls'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -31,7 +31,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'myblog.urls'
 
 TEMPLATES = [
     {
@@ -68,22 +67,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.1/topics/i18n/
-
 LANGUAGE_CODE = 'ja'
-
 TIME_ZONE = 'Asia/Tokyo'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
@@ -93,23 +83,21 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# redirect url
 LOGIN_REDIRECT_URL = '/blog/home'
 
 # extra configuraion for my project
 ALLOWED_HOSTS = ['*']
 
-
+# for heroku settings
 DATABASES = { 'default' : dj_database_url.config() }
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# STATIC_ROOT = 'staticfiles'
-DEBUG = True
+DEBUG = False
 
-
-# try:
-#     from .local_settings import *
-# except ImportError:
-#     pass
-
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
 if DEBUG:
     import django_heroku

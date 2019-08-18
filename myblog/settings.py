@@ -96,7 +96,7 @@ ALLOWED_HOSTS = ['*']
 DATABASES = { 'default' : dj_database_url.config() }
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # STATIC_ROOT = 'staticfiles'
-DEBUG = False
+DEBUG = True
 
 
 # try:
@@ -105,6 +105,6 @@ DEBUG = False
 #     pass
 
 
-if not DEBUG:
+if DEBUG:
     import django_heroku
     django_heroku.settings(locals())

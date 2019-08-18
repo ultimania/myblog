@@ -1,6 +1,8 @@
 import os
 import dj_database_url
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 DEBUG = False
 
 SECRET_KEY = '_!*7$ym_1wp4y&q5z&a(j4)7%0pr+hr$*g*v_)lzm#+vk_wj_l'

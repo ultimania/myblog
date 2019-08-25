@@ -9,7 +9,7 @@
     <div class="pick_up effect">
         <div id="content_title"> {{ content_title }} </div>
         <div class="form_area" id="content">
-            <form method="post" action="{% url 'blog:post' %}">
+            <form method="POST">
                 {% csrf_token %}
                 <div class="form-group post" id="title">
                     {{ form.title }}
@@ -22,10 +22,9 @@
                 <div class="form-group post" id="text">
                     {{ form.text }}
                 </div>
+                {{ form.id }}
                 <div class="form-group post" id="buttton">
-                    <input class="form-btn" type="preview" value="プレビュー" />
-                    <input class="form-btn" type="draft" value="下書き保存する" />
-                    <input class="form-btn" type="submit" value="投稿する" />
+                    <input class="form-btn" type="submit" value="プレビュー" />
                 </div>
             </form>
             <form action="{% url 'blog:upload' %}" method="POST" enctype="multipart/form-data" id="upload_form">

@@ -3,6 +3,7 @@
 media/*
 myblog/local_settings.py
 db.sqlite3
+templates/admin/
 
 # **/migrations/*
 # !__init__.py

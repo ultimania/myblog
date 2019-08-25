@@ -301,11 +301,10 @@ header .h_btn a i, header .search_form {
 */
 #content.form_area {
   height: 80%;
-  width: 80%;
   background-color: rgba(200, 200, 200, 0.5);
   border: #008C69;
   padding: 4%;
-  margin: 4%;
+  margin: 2%;
   font-family: 'Roboto', sans-serif;
   position: static;
 }
@@ -322,16 +321,15 @@ header .h_btn a i, header .search_form {
 }
 
 #text.form-group.post {
-  width: 100%;
   height: 80%;
   font-size: 16px;
 }
 
 #content.form_area textarea#id_text {
-  width: 80%;
-  height: 50%;
+  width: 100%;
+  height: 90%;
   font-size: 16px;
-  position: absolute;
+  /* position: absolute; */
 }
 
 /*
@@ -340,13 +338,65 @@ header .h_btn a i, header .search_form {
 .form_area {
   top: 10%;
   right: 10%;
-  width: 30%;
-  background-color: rgba(200, 200, 200, 0.5);
   border: #008C69;
   padding: 40px 40px 100px 40px;
-  margin: 5% 10% 10%;
+  margin: 2%;
   font-family: 'Roboto', sans-serif;  
 }
+
+#topic.form_area {
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+#login.form_area {
+  width: 40%;
+  left: 10%;
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+/*
+  コメントフォームここから
+*/
+#comment_form.form_area {
+  padding: 1%;
+}
+
+#comment_form.form_area label {
+  display: none;
+}
+
+#comment_view.form_area {
+  padding: 1%;
+  background-color: rgba(50, 200, 100, 0.5);
+  margin-bottom: 20px;
+  width: 70%;
+}  
+
+#comment_form.form_area .form-control {
+  font-size: 18px;
+  width: 100%;
+  margin-top: 1%;
+}  
+
+#comment_form.form_area input.form-btn {
+  width: auto;
+} 
+
+#comment_view.form_area div#text.comment {  
+  background: url("/static/BlogManager/img/comment2_bottom.png") no-repeat bottom;
+  background-size: 100%;
+  padding: 1% 3% 5% 3%;
+} 
+
+#comment_view.form_area div#author.comment {
+  display: inline-block;
+  color: #fff;
+} 
+
+#comment_view.form_area div#created_at.comment {
+  float: right;
+  color: #fff;
+} 
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
@@ -448,13 +498,14 @@ header .h_btn a i, header .search_form {
   height: 100%;
   width: 100%;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 }
 
 #index_top.post {
-  height: 100%;
-  width: 100%;
-  position: relative;
+  overflow: auto;
+}
+
+#index_top.topic {
   overflow: auto;
 }
 
@@ -1083,7 +1134,7 @@ FAQ
 -------------------------------------------*/
 
 .pick_up {
-  height: 100%;
+  /* height: 100%; */
   /* max-height: 500px; */
   width: 100%;
   position: absolute;
@@ -2300,7 +2351,7 @@ PCグローバルナビ
 その他
 -------------------------------------------*/
   input, textarea {
-    max-width: 300px !important;
+    max-width: 100% !important;
   }
   .content table.table_01 th, .content table.table_01 td {
     width: 100% !important;

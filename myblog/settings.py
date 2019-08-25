@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'BlogManager',
     'AccountManager',
     'widget_tweaks',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

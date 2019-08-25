@@ -2,15 +2,35 @@
 {% load static %}
 
 {% block content %}
-<div id="index_top" class="post">
+<div id="index_top" class="topic">
     <div id="top_catch">
         {% include 'BlogManager/catch.html' %}
     </div>
     <div class="pick_up effect">
         <div id="content_title"> {{ model_data.title }} </div>
-        <div class="form_area" id="content">
-            {{ model_data.text|safe }}
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form_area" id="topic">
+                {{ model_data.text|safe }}
+            </div>
+            <div class="form_area" id="comment_form">
+                {{ comment_form.as_p }}
+                <input class="form-btn" type="submit" value="投稿" />
+            </div>
+        </form>
+        {% for comment in comments %}
+        <div class="form_area" id="comment_view">
+            <div class="comment" id="text">
+                <p>{{ comment.text }}</p>
+            </div>
+            <div class="comment" id="author">
+                <p>{{ comment.author }}</p>
+            </div>
+            <div class="comment" id="created_at">
+                <p>{{ comment.created_at }}</p>
+            </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 

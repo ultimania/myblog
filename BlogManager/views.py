@@ -6,6 +6,11 @@ from .utils import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_http_methods
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.contrib import messages
 
 class BlogBaseView(generic.ListView):
     # 記事一覧画面をデフォルトとする
@@ -63,8 +68,10 @@ class BlogBaseView(generic.ListView):
         context['search_form'] = SearchForm(initial={'search_words': search_words,})
         context['upload_form'] = UploadForm()
         context['post_form'] = PostForm()
+        context['comment_form'] = CommentForm()
         # コンテンツ情報の設定
         context['content_title'] = "記事一覧"
+        context['digest_link'] = "blog:topic"
         # ホーム画面の場合はページングしない
         context['page_obj'] = None if self.namespace == 'home' else context['page_obj']
         return context
@@ -84,9 +91,45 @@ class TopicView(BlogBaseView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # URLのpkの価で一意な情報を取得する
-        context['model_data'] = TopicsTr.objects.filter(id=self.kwargs['pk']).get()
+        context['model_data'] = TopicsTr.objects.filter(id=self.kwargs['pk']).select_related().get()
         context['page_title'] = "feivs2019's blog | " + context['model_data'].title
+        context['comments'] = CommentTr.objects.filter(topic=context['model_data'].id).order_by('-created_at')
         return context
+
+    def post(self, request, *args, **kwargs):
+        # コメント投稿処理
+        data = {
+            "topic"   : TopicsTr.objects.filter(id=self.kwargs['pk']).select_related().get()
+            ,"author" : self.request.POST['author']
+            ,"text" : self.request.POST['text']
+        }
+        CommentTr.objects.create(**data)
+        # GETリクエスト処理
+        return self.get(request, *args, **kwargs)
+        
+
+class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = TopicsTr
+    form_class = PostForm
+    template_name = 'BlogManager/post.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = "feivs2019's blog | 記事を書く"
+        context['keywords'] = "feivs2019,blog,Django,Python"
+        # Formオブジェクトの設定
+        search_words = self.request.session['search_words'][0] if 'search_words' in self.request.session else ''
+        context['search_form'] = SearchForm(initial={'search_words': search_words,})
+        context['upload_form'] = UploadForm()
+        # コンテンツ情報の設定
+        context['content_title'] = "記事を書く"
+        return context
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(
+            self.request, '「{}」を更新しました'.format(form.instance))
+        return result
 
 
 class PostView(LoginRequiredMixin, generic.CreateView):
@@ -98,16 +141,19 @@ class PostView(LoginRequiredMixin, generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['post_form'] = PostForm()
+        context['post_link'] = "blog:post"
+
         context['page_title'] = "feivs2019's blog | 記事を書く"
         context['keywords'] = "feivs2019,blog,Django,Python"
         # Formオブジェクトの設定
         search_words = self.request.session['search_words'][0] if 'search_words' in self.request.session else ''
         context['search_form'] = SearchForm(initial={'search_words': search_words,})
         context['upload_form'] = UploadForm()
-        context['post_form'] = PostForm()
         # コンテンツ情報の設定
         context['content_title'] = "記事を書く"
         return context
+
 
 
 class DraftsView(LoginRequiredMixin, BlogBaseView):
@@ -116,6 +162,8 @@ class DraftsView(LoginRequiredMixin, BlogBaseView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['content_title'] = "下書き一覧"
+        context['digest_link'] = "blog:update"
+
         return context
 
 
@@ -136,3 +184,4 @@ class SearchView(generic.ListView):
         context = super().get_context_data(**kwargs)
         context['content_title'] = text + "を含む記事一覧 (全" + str(len(context['object'])) + "件)"
         return context
+

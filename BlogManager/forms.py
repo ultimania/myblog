@@ -1,6 +1,22 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
-from .models import TopicsTr, MediaTr
+from .models import *
+
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = CommentTr
+        fields = ("author","text")
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['placeholder'] = field.label 
+            field.widget.attrs['onkeyup'] = "this.setAttribute('value', this.value);"
+            field.widget.attrs['value'] = ""
+
 
 class UploadForm(forms.ModelForm):
 
@@ -30,12 +46,13 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = TopicsTr
-        fields = ("title","text",)
+        fields = ('title','text',)
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # self.fields["id"].widget.attrs['type'] = "hidden"
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
             field.widget.attrs['placeholder'] = field.label 
             field.widget.attrs['onkeyup'] = "this.setAttribute('value', this.value);"
-            field.widget.attrs['value'] = ""
+            # field.widget.attrs['value'] = ""

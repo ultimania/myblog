@@ -7,7 +7,7 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = CommentTr
-        fields = ("author","text")
+        fields = ("author","text",)
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

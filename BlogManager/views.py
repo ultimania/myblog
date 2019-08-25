@@ -1,40 +1,30 @@
-from django.shortcuts import render
-from django.views import generic
 from .models import *
 from .forms import *
 from .utils import *
+
+from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.decorators.http import require_http_methods
-from rest_framework.decorators import api_view
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from django.contrib import messages
 
+'''===================================================
+    BlogBaseViewクラス
+        親クラス: generic.ListView
+        urlマップ: blog:list
+==================================================='''
 class BlogBaseView(generic.ListView):
     # 記事一覧画面をデフォルトとする
     # それ以外の画面のビューとして継承する際は適宜書き換えること
     model                   = TopicsTr
     namespace               = 'list'
-    context_object_name     = 'model_data'
+    context_object_name     = 'topics'
     template_name           = 'BlogManager/list.html'
     paginate_by             = 8
     extract_length          = 40
 
-    def post(self, request, *args, **kwargs):
-        if(self.namespace == 'search'):
-            # 各ページからの検索ボタンによるPOST受付処理
-            search_value = [self.request.POST.get('search_words', None),]
-            request.session['search_words'] = search_value
-            # 検索時にページネーションに関連したエラーを防ぐ
-            self.request.GET = self.request.GET.copy()
-            self.request.GET.clear()
-            # GETリクエスト処理
-            return self.get(request, *args, **kwargs)
-
     def get_queryset(self):
-        # 検索条件の設定
+        # フィルタリング条件の設定
         q_objects = Q(isdraft=False)
         order_by = '-created_at'
         if self.request.method == 'POST' and 'search_words' in self.request.session:
@@ -44,7 +34,7 @@ class BlogBaseView(generic.ListView):
             for search_word in search_words:
                 q_objects |= Q(text__contains=search_word)
         elif self.namespace == 'drafts':
-            # 下書き一覧の場合は下書きフラグが立っているもの
+            # 下書き一覧の場合は下書きフラグが立っているものを対象
             q_objects = Q(isdraft=True)
         else:
             pass
@@ -55,20 +45,10 @@ class BlogBaseView(generic.ListView):
             query.created_at = query.created_at.date()
         return queryset
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # ヘッダ情報の設定
-        context['page_title'] = "feivs2019's blog | " + self.namespace
-        context['keywords'] = "feivs2019,blog,Django,Python"
-        count = len(self.get_queryset())
-        # sessionに値がある場合、その値をセットする。（ページングしてもform値が変わらないように）
-        search_words = self.request.session['search_words'][0] if 'search_words' in self.request.session else ''
-        # Formオブジェクトの設定
-        context['search_form'] = SearchForm(initial={'search_words': search_words,})
-        context['upload_form'] = UploadForm()
-        context['post_form'] = PostForm()
-        context['comment_form'] = CommentForm()
+        # 共通設定の取得
+        get_common_data(self, context)
         # コンテンツ情報の設定
         context['content_title'] = "記事一覧"
         context['digest_link'] = "blog:topic"
@@ -77,6 +57,12 @@ class BlogBaseView(generic.ListView):
         return context
 
 
+'''===================================================
+    UploadViewクラス
+        親クラス: LoginRequiredMixin
+                   generic.CreateView
+        urlマップ: blog:upload
+==================================================='''
 class UploadView(LoginRequiredMixin, generic.CreateView):
     """ファイルモデルのアップロードビュー POST専用"""
     model = MediaTr
@@ -84,6 +70,64 @@ class UploadView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy('blog:post')
     
 
+'''===================================================
+    DraftsViewクラス
+        親クラス: LoginRequiredMixin
+                 BlogBaseView
+        urlマップ: blog:drafts
+==================================================='''
+class DraftsView(LoginRequiredMixin, BlogBaseView):
+    namespace               = 'drafts'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # コンテンツ情報の設定
+        context['content_title'] = "下書き一覧"
+        context['digest_link'] = "blog:update"
+        return context
+
+
+'''===================================================
+    HomeViewクラス
+        親クラス: BlogBaseView
+        urlマップ: blog:home
+==================================================='''
+class HomeView(BlogBaseView):
+    template_name = 'BlogManager/index.html'
+    namespace               = 'home'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['content_title'] = "最新記事"
+        return context
+
+
+'''===================================================
+    SearchViewクラス
+        親クラス: BlogBaseView
+        urlマップ: blog:search
+==================================================='''
+class SearchView(BlogBaseView):
+    namespace               = 'search'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['content_title'] = " ".join(context['search_words']) + "を含む記事一覧 (全" + str(len(context['object_list'])) + "件)"
+        return context
+
+    def post(self, request, *args, **kwargs):
+        # 検索時にページネーションに関連したエラーを防ぐ
+        self.request.GET = self.request.GET.copy()
+        self.request.GET.clear()
+        # GETリクエスト処理
+        return self.get(request, *args, **kwargs)
+
+
+'''===================================================
+    TopicViewクラス
+        親クラス: BlogBaseView
+        urlマップ: blog:topic
+==================================================='''
 class TopicView(BlogBaseView):
     template_name           = 'BlogManager/topic.html'
     namespace               = 'topic'
@@ -91,8 +135,9 @@ class TopicView(BlogBaseView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # URLのpkの価で一意な情報を取得する
-        context['model_data'] = TopicsTr.objects.filter(id=self.kwargs['pk']).select_related().get()
+        context['topic'] = TopicsTr.objects.filter(id=self.kwargs['pk']).select_related().get()
         context['page_title'] = "feivs2019's blog | " + context['model_data'].title
+        # topicに紐付くコメント情報を取得
         context['comments'] = CommentTr.objects.filter(topic=context['model_data'].id).order_by('-created_at')
         return context
 
@@ -108,80 +153,55 @@ class TopicView(BlogBaseView):
         return self.get(request, *args, **kwargs)
         
 
-class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
+'''===================================================
+    PostFormViewクラス
+        親クラス: LoginRequiredMixin
+                 generic.CreateView
+        urlマップ: blog:topic
+==================================================='''
+class PostFormView(LoginRequiredMixin, generic.FormView):
     model = TopicsTr
     form_class = PostForm
     template_name = 'BlogManager/post.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_title'] = "feivs2019's blog | 記事を書く"
-        context['keywords'] = "feivs2019,blog,Django,Python"
-        # Formオブジェクトの設定
-        search_words = self.request.session['search_words'][0] if 'search_words' in self.request.session else ''
-        context['search_form'] = SearchForm(initial={'search_words': search_words,})
-        context['upload_form'] = UploadForm()
+        # 共通設定の取得
+        get_common_data(self, context)
         # コンテンツ情報の設定
         context['content_title'] = "記事を書く"
         return context
 
     def form_valid(self, form):
+        # 保存種別によってフラグを変える
+        if self.request.POST.get('save_flg') == 'draft':
+            self.object.isdraft = True
+            result_message = '記事を下書き保存しました'
+        else:
+            self.object.isdraft = False
+            result_message = '記事を更新しました'
         result = super().form_valid(form)
         messages.success(
-            self.request, '「{}」を更新しました'.format(form.instance))
+            self.request, result_message.format(form.instance))
         return result
 
 
-class PostView(LoginRequiredMixin, generic.CreateView):
-    model = TopicsTr
-    form_class = PostForm
-    context_object_name = 'model_data'
-    template_name = 'BlogManager/post.html'
-    success_url = "/blog/list"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['post_form'] = PostForm()
-        context['post_link'] = "blog:post"
-
-        context['page_title'] = "feivs2019's blog | 記事を書く"
-        context['keywords'] = "feivs2019,blog,Django,Python"
-        # Formオブジェクトの設定
-        search_words = self.request.session['search_words'][0] if 'search_words' in self.request.session else ''
-        context['search_form'] = SearchForm(initial={'search_words': search_words,})
-        context['upload_form'] = UploadForm()
-        # コンテンツ情報の設定
-        context['content_title'] = "記事を書く"
-        return context
+'''===================================================
+    PostFormViewクラス
+        親クラス: PostFormView
+                 generic.CreateView
+        urlマップ: blog:post
+==================================================='''
+class PostView(PostFormView, generic.CreateView):
+    namespace               = 'post'
 
 
-
-class DraftsView(LoginRequiredMixin, BlogBaseView):
-    namespace               = 'drafts'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['content_title'] = "下書き一覧"
-        context['digest_link'] = "blog:update"
-
-        return context
-
-
-class HomeView(BlogBaseView):
-    template_name = 'BlogManager/index.html'
-    namespace               = 'home'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['content_title'] = "最新記事"
-        return context
-
-
-class SearchView(generic.ListView):
-    namespace               = 'search'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['content_title'] = text + "を含む記事一覧 (全" + str(len(context['object'])) + "件)"
-        return context
+'''===================================================
+    TopicUpdateViewクラス
+        親クラス: PostFormView
+                 generic.UpdateView
+        urlマップ: blog:update
+==================================================='''
+class TopicUpdateView(PostFormView, generic.UpdateView):
+    namespace               = 'update'
 

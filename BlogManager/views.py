@@ -64,7 +64,6 @@ class BlogBaseView(generic.ListView):
         urlマップ: blog:upload
 ==================================================='''
 class UploadView(LoginRequiredMixin, generic.CreateView):
-    """ファイルモデルのアップロードビュー POST専用"""
     model = MediaTr
     form_class = UploadForm
     success_url = reverse_lazy('blog:post')
@@ -124,21 +123,21 @@ class SearchView(BlogBaseView):
 
 
 '''===================================================
-    TopicViewクラス
+    TopicDetailViewクラス
         親クラス: BlogBaseView
         urlマップ: blog:topic
 ==================================================='''
-class TopicView(BlogBaseView):
+class TopicDetailView(BlogBaseView):
     template_name           = 'BlogManager/topic.html'
     namespace               = 'topic'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # URLのpkの価で一意な情報を取得する
+        # URLのpkから一意な情報を取得する
         context['topic'] = TopicsTr.objects.filter(id=self.kwargs['pk']).select_related().get()
-        context['page_title'] = "feivs2019's blog | " + context['model_data'].title
+        context['page_title'] = "feivs2019's blog | " + context['topic'].title
         # topicに紐付くコメント情報を取得
-        context['comments'] = CommentTr.objects.filter(topic=context['model_data'].id).order_by('-created_at')
+        context['comments'] = CommentTr.objects.filter(topic=context['topic'].id).order_by('-created_at')
         return context
 
     def post(self, request, *args, **kwargs):
@@ -151,7 +150,20 @@ class TopicView(BlogBaseView):
         CommentTr.objects.create(**data)
         # GETリクエスト処理
         return self.get(request, *args, **kwargs)
-        
+
+
+'''===================================================
+    TopicPreviewViewクラス
+        親クラス: TopicDetailView
+        urlマップ: blog:topic
+==================================================='''
+class TopicPreviewView(TopicDetailView):
+    template_name           = 'BlogManager/preview.html'
+    namespace               = 'preview'
+
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
 
 '''===================================================
     PostFormViewクラス
@@ -173,17 +185,18 @@ class PostFormView(LoginRequiredMixin, generic.FormView):
         return context
 
     def form_valid(self, form):
-        # 保存種別によってフラグを変える
-        if self.request.POST.get('save_flg') == 'draft':
-            self.object.isdraft = True
-            result_message = '記事を下書き保存しました'
-        else:
-            self.object.isdraft = False
-            result_message = '記事を更新しました'
+        # ボタン分岐
+        form.fields['title'] = 'hogehoge'
+        if 'preview' in self.request.POST:
+            form.fields['isdraft'] = True
         result = super().form_valid(form)
-        messages.success(
-            self.request, result_message.format(form.instance))
         return result
+
+    def get_success_url(self):
+        # ボタン分岐
+        if 'preview' in self.request.POST:
+            return reverse_lazy('blog:preview',args=(self.object.id,))
+        return super().get_success_url()
 
 
 '''===================================================
@@ -204,4 +217,5 @@ class PostView(PostFormView, generic.CreateView):
 ==================================================='''
 class TopicUpdateView(PostFormView, generic.UpdateView):
     namespace               = 'update'
+
 

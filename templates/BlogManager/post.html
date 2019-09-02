@@ -22,9 +22,10 @@
                 <div class="form-group post" id="text">
                     {{ form.text }}
                 </div>
-                {{ form.id }}
+                {{ form.isdraft }}下書き
                 <div class="form-group post" id="buttton">
-                    <input class="form-btn" type="submit" value="プレビュー" />
+                    <input class="form-btn" type="submit" name="preview" value="プレビュー" />
+                    <input class="form-btn" type="submit" name="post" value="更新" />
                 </div>
             </form>
             <form action="{% url 'blog:upload' %}" method="POST" enctype="multipart/form-data" id="upload_form">

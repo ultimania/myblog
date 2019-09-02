@@ -9,6 +9,7 @@ urlpatterns = [
     path('drafts/', views.DraftsView.as_view(), name='drafts'),
     path('post/', views.PostView.as_view(), name='post'),
     path('update/<uuid:pk>', views.TopicUpdateView.as_view(), name='update'),
-    path('topic/<uuid:pk>', views.TopicView.as_view(), name='topic'),
+    path('topic/<uuid:pk>', views.TopicDetailView.as_view(), name='topic'),
+    path('preview/<uuid:pk>', views.TopicPreviewView.as_view(), name='preview'),
     path('upload', views.UploadView.as_view(), name='upload'),
 ]

@@ -46,7 +46,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = TopicsTr
-        fields = ('title','text',)
+        fields = ('title','text','isdraft',)
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

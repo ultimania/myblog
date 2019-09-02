@@ -1,0 +1,23 @@
+{% extends 'BlogManager/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="index_top" class="topic">
+    <div id="top_catch">
+        {% include 'BlogManager/catch.html' %}
+    </div>
+    <div class="pick_up effect">
+        <div id="content_title"> {{ topic.title }} </div>
+        <div class="form_area" id="topic"> {{ topic.text|safe }} </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group post" id="buttton">
+                <input class="form-btn" type="submit" name="post" value="更新" />
+                <input class="form-btn" type="submit" name="draft" value="下書き保存" />
+                <input class="form-btn" type="submit" name="draft" value="キャンセル" />
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

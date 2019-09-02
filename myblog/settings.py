@@ -1,5 +1,5 @@
 import os
-import dj_database_url
+# import dj_database_url
 
 # base settings
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -91,7 +91,7 @@ LOGIN_REDIRECT_URL = '/blog/home'
 ALLOWED_HOSTS = ['*']
 
 # for heroku settings
-DATABASES = { 'default' : dj_database_url.config() }
+# DATABASES = { 'default' : dj_database_url.config() }
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 DEBUG = False
 
@@ -100,6 +100,6 @@ try:
 except ImportError:
     pass
 
-if DEBUG:
-    import django_heroku
-    django_heroku.settings(locals())
+#if DEBUG:
+#    import django_heroku
+#    django_heroku.settings(locals())

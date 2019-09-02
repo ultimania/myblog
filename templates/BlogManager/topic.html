@@ -8,11 +8,11 @@
     </div>
     <div class="pick_up effect">
         <div id="content_title"> {{ topic.title }} </div>
-        <form method="post" action="">
+        <div class="form_area" id="topic">
+            {{ topic.text|safe }}
+        </div>
+        <form method="post">
             {% csrf_token %}
-            <div class="form_area" id="topic">
-                {{ topic.text|safe }}
-            </div>
             <div class="form_area" id="comment_form">
                 {{ comment_form.as_p }}
                 <input class="form-btn" type="submit" value="投稿" />

@@ -50,8 +50,8 @@ RUN set -x && \
     django-admin startproject ${PROJECT_NAME}
 
 # Djangoプロジェクトの作成
-COPY ./my_setting.py /root/${PROJECT_NAME}/${PROJECT_NAME}/
-COPY ./startup.sh /root/
+COPY ./kubernetes/docker_dev/my_setting.py /root/${PROJECT_NAME}/${PROJECT_NAME}/
+COPY ./kubernetes/docker_dev/startup.sh /root/
 RUN set -x && \
     cat ~/${PROJECT_NAME}/${PROJECT_NAME}/my_setting.py >> ~/${PROJECT_NAME}/${PROJECT_NAME}/settings.py && \
     useradd admin -G root && \

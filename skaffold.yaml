@@ -1,0 +1,51 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+  - imageName: docker.io/ultimania/myblog
+    workspace: .
+    docker:
+      dockerfilePath: ./kubernetes/docker_dev/Dockerfile
+  local:
+    skipPush: true
+deploy:
+  helm:
+    releases:
+    - name: helm-dev
+      chartPath: kubernetes/helm
+      namespace: myblog-dev
+      valuesFiles: kubernetes/dev/helm-values.yaml
+      setValues:
+        replicaCount: 1
+        ingress.enabled: false
+        http.port: 8080
+        http.nodePort: 30080
+        debug.enabled: true
+        debug.port: 8081
+        debug.nodePort: 30081
+profiles:
+  - name: release
+    build:
+      artifacts:
+      - imageName: docker.io/ultimania/myblog
+        workspace: .
+        docker:
+          dockerfilePath: ./kubernetes/docker_dev/Dockerfile
+      local:
+        skipPush: false
+      tagPolicy:
+        gitCommit: {}
+    deploy:
+      helm:
+        releases:
+        - name: helm-release
+          chartPath: kubernetes/helm
+          namespace: myblog-release
+          values:
+            image: docker.io/ultimania/myblog
+          setValues:
+            replicaCount: 1
+            ingress.enabled: true
+            http.port: 80
+            http.targetPort:
+            debug.enabled: false

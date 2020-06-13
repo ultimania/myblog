@@ -10,8 +10,6 @@ ENV DJANGO_VERSION="3.0.5"
 ENV PROJECT_NAME="myproject"
 ENV DB_NAME="django"
 RUN set -x && \
-    # echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
-    # dnf clean all && rm -r /var/cache/dnf  && dnf upgrade -y && dnf update -y & hostname && \
     dnf -y install mariadb-devel libffi-devel xz xz-devel git zlib-devel bzip2 bzip2-devel openssl-devel gcc make && \
     cd /usr/local/src && \
     curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \

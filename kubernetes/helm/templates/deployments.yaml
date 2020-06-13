@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: django-dev
+  namespace: myblog-prod
 spec:
   replicas: 1
   selector:

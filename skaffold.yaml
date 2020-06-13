@@ -13,7 +13,7 @@ deploy:
     releases:
     - name: helm-dev
       chartPath: kubernetes/helm
-      namespace: myblog-dev
+      namespace: myblog-prod
       valuesFiles: kubernetes/dev/values.yaml
       setValues:
         replicaCount: 1
@@ -36,16 +36,6 @@ profiles:
       tagPolicy:
         gitCommit: {}
     deploy:
-      helm:
-        releases:
-        - name: helm-release
-          chartPath: kubernetes/helm
-          namespace: myblog-release
-          values:
-            image: pshost01:5000/study/mydjango
-          setValues:
-            replicaCount: 1
-            ingress.enabled: true
-            http.port: 80
-            http.targetPort:
-            debug.enabled: false
+      kubectl:
+        manifests:
+        - kubernetes/helm/templates/*.yaml

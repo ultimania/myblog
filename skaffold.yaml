@@ -1,8 +1,10 @@
 apiVersion: skaffold/v1alpha2
 kind: Config
 build:
+  tagPolicy:
+    sha256: {}
   artifacts:
-  - imageName: pshost01:5000/study/mydjango:latest
+  - imageName: pshost01:5000/study/mydjango
     workspace: .
     docker:
       dockerfilePath: ./kubernetes/docker_dev/Dockerfile
@@ -27,7 +29,7 @@ profiles:
   - name: release
     build:
       artifacts:
-      - imageName: pshost01:5000/study/mydjango:latest
+      - imageName: pshost01:5000/study/mydjango
         workspace: .
         docker:
           dockerfilePath: ./kubernetes/docker_dev/Dockerfile

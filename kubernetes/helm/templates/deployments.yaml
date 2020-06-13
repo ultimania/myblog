@@ -37,7 +37,7 @@ spec:
         - name: db-volume
           mountPath: /var/lib/mysql
       - name: ap-server
-        image: pshost01:5000/myblog
+        image: pshost01:5000/study/mydjango
         ports:
         - containerPort: 8000
           name: django-server

@@ -32,8 +32,4 @@ podTemplate(
       }
     }
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 03644b79fb4f7f6beaf0af1521c33c4b4086adb0

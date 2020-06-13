@@ -1,14 +1,17 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: django-dev
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: django-dev  
   template:
     metadata:
       labels:
-        name: django-dev
+        name: django-dev  
     spec:
       hostname: django-dev
       containers:
@@ -33,7 +36,7 @@ spec:
         - name: db-volume
           mountPath: /var/lib/mysql
       - name: ap-server
-        image: pshost02:5000/study/django:1.0
+        image: pshost01:5000/myblog
         ports:
         - containerPort: 8000
           name: django-server

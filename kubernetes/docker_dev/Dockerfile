@@ -12,7 +12,7 @@ ENV DB_NAME="django"
 RUN set -x && \
     # echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
     # dnf clean all && rm -r /var/cache/dnf  && dnf upgrade -y && dnf update -y & hostname && \
-    dnf -y install mariadb-devel libffi-devel xz xz-devel git zlib-devel bzip2 bzip2-devel readline-devel openssl-devel sqlite sqlite-devel gcc make && \
+    dnf -y install mariadb-devel libffi-devel xz xz-devel git zlib-devel bzip2 bzip2-devel openssl-devel gcc make && \
     cd /usr/local/src && \
     curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
     tar xvzf Python-${PYTHON_VERSION}.tgz && \
@@ -28,22 +28,13 @@ RUN set -x && \
 RUN set -x && \
     pip install --upgrade pip && \
     pip install django==${DJANGO_VERSION} && \
-    pip install djangorestframework && \
     pip install django-filter && \
-    pip install djangorestframework-jwt && \
-    # pip install PyMySQL && \
     pip install mysqlclient && \
     pip install uwsgi && \
     pip install django-hamlpy && \
-    pip install BeautifulSoup4 && \
     pip install mpl_finance && \
-    pip install pandas && \
-    pip install scikit-learn && \
     pip install django-widget-tweaks && \
     pip install pycrypto && \
-    pip install tweepy && \
-    pip install nose && \
-    pip install mecab-python3 && \
     pip install gensim && \
     pip install django-extensions && \
     pip install jupyterlab && \

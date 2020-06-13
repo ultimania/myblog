@@ -7,17 +7,12 @@ spec:
   selector:
     name: django-dev
   ports:
-  - port: 10000
+  - port: 8100
     targetPort: 8000
-    nodePort: 30000
     protocol: TCP
     name: django-server
-  - port: 10001
+  - port: 8101
     targetPort: 8888
-    nodePort: 30001
     protocol: TCP
     name: jupyter
-  externalIPs:
-  - 192.168.0.21
-  - 192.168.0.22
-  type: NodePort
+  type: LoadBalancer

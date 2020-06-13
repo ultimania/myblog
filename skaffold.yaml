@@ -36,6 +36,16 @@ profiles:
       tagPolicy:
         gitCommit: {}
     deploy:
-      kubectl:
-        manifests:
-        - kubernetes/helm/templates/*.yaml
+      helm:
+        releases:
+        - name: helm-release
+          chartPath: kubernetes/helm
+          namespace: myblog-prod
+          values:
+            image: pshost01:5000/study/mydjango
+          setValues:
+            replicaCount: 1
+            ingress.enabled: true
+            http.port: 80
+            http.targetPort:
+            debug.enabled: false

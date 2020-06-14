@@ -21,7 +21,7 @@ podTemplate(
           """
         }
       }
-      stage('Test skaffold') {
+      stage('Image Build & Push by skaffold') {
         git 'https://github.com/ultimania/myblog'
         container('skaffold-insider') {
           sh """

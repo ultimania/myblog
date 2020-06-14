@@ -10,12 +10,6 @@ build:
       dockerfilePath: ./kubernetes/docker_dev/Dockerfile
   local:
     skipPush: true
-deploy:
-  helm:
-    releases:
-    - name: helm-dev
-      chartPath: kubernetes/helm
-      namespace: myblog-prod
 profiles:
   - name: release
     build:

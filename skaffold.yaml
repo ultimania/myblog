@@ -16,14 +16,6 @@ deploy:
     - name: helm-dev
       chartPath: kubernetes/helm
       namespace: myblog-prod
-      setValues:
-        replicaCount: 1
-        ingress.enabled: false
-        http.port: 8080
-        http.nodePort: 30080
-        debug.enabled: true
-        debug.port: 8081
-        debug.nodePort: 30081
 profiles:
   - name: release
     build:
@@ -42,11 +34,4 @@ profiles:
         - name: helm-release
           chartPath: kubernetes/helm
           namespace: myblog-prod
-          values:
-            image: pshost01:5000/study/mydjango
-          setValues:
-            replicaCount: 1
-            ingress.enabled: true
-            http.port: 80
-            http.targetPort:
-            debug.enabled: false
+          skipBuildDependencies: true

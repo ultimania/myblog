@@ -28,6 +28,7 @@ RUN set -x && \
     pip install django==${DJANGO_VERSION} && \
     pip install django-filter && \
     pip install mysqlclient && \
+    pip install PyMySQL && \
     pip install uwsgi && \
     pip install django-hamlpy && \
     pip install mpl_finance && \

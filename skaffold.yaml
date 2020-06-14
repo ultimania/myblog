@@ -28,10 +28,3 @@ profiles:
         skipPush: false
       tagPolicy:
         gitCommit: {}
-    deploy:
-      helm:
-        releases:
-        - name: helm-release
-          chartPath: kubernetes/helm
-          namespace: myblog-prod
-          skipBuildDependencies: true

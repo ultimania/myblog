@@ -27,6 +27,6 @@ profiles:
       tagPolicy:
         gitCommit: {}
     deploy:
-  kubectl:
-    manifests:
-    - /kubernetes/helm/templates/deployments.yaml
+      kubectl:
+        manifests:
+        - /kubernetes/helm/templates/deployments.yaml

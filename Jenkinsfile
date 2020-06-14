@@ -18,6 +18,7 @@ podTemplate(
             whoami
             pwd
             ls -al
+            env
           """
         }
       }

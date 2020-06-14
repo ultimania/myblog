@@ -16,7 +16,6 @@ deploy:
     - name: helm-dev
       chartPath: kubernetes/helm
       namespace: myblog-prod
-      valuesFiles: kubernetes/dev/values.yaml
       setValues:
         replicaCount: 1
         ingress.enabled: false

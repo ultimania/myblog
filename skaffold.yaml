@@ -13,7 +13,7 @@ build:
 deploy:
   kubectl:
     manifests:
-    - /kubernetes/helm/templates/deployments.yaml
+    - ./kubernetes/helm/templates/deployments.yaml
 profiles:
   - name: release
     build:
@@ -29,4 +29,4 @@ profiles:
     deploy:
       kubectl:
         manifests:
-        - /kubernetes/helm/templates/deployments.yaml
+        - ./kubernetes/helm/templates/deployments.yaml

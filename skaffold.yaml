@@ -10,6 +10,10 @@ build:
       dockerfilePath: ./kubernetes/docker_dev/Dockerfile
   local:
     skipPush: true
+deploy:
+  kubectl:
+    manifests:
+    - /kubernetes/helm/templates/deployments.yaml
 profiles:
   - name: release
     build:
@@ -22,3 +26,7 @@ profiles:
         skipPush: false
       tagPolicy:
         gitCommit: {}
+    deploy:
+  kubectl:
+    manifests:
+    - /kubernetes/helm/templates/deployments.yaml

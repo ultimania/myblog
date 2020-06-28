@@ -15,7 +15,7 @@ spec:
         name: django-dev  
     spec:
       hostname: django-dev
-      containers:
+      initContainers:
       - name: db-server
         image: mysql:5.7
         env: 
@@ -36,6 +36,7 @@ spec:
         volumeMounts:
         - name: db-volume
           mountPath: /var/lib/mysql
+      containers:
       - name: ap-server
         image: pshost01:5000/study/mydjango
         ports:

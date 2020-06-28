@@ -7,11 +7,10 @@ WORKDIR /root
 ENV PATH="$PATH:/usr/local/python/bin"
 ENV PYTHON_VERSION="3.8.2"
 ENV DJANGO_VERSION="3.0.5"
-ENV PROJECT_NAME="myproject"
 ENV DB_NAME="django"
-ENV APP_REPOS="https://github.com/ultimania/myblog.git"
 RUN set -x && \
-    dnf -y install mariadb-devel libffi-devel xz xz-devel git zlib-devel bzip2 bzip2-devel openssl-devel gcc make && \
+    # dnf -y install mariadb-devel libffi-devel xz xz-devel git zlib-devel bzip2 bzip2-devel openssl-devel gcc make && \
+    dnf -y install mariadb-devel libffi-devel xz xz-devel git gcc make && \
     cd /usr/local/src && \
     curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
     tar xvzf Python-${PYTHON_VERSION}.tgz && \

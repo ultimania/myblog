@@ -38,7 +38,7 @@ RUN set -x && \
     pip install pycrypto && \
     pip install gensim && \
     pip install django-extensions && \
-    pip install jupyterlab && \
+    pip install jupyterlab
     ## django-admin startproject ${PROJECT_NAME}
 
 # Djangoプロジェクトの作成

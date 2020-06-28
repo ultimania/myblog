@@ -42,7 +42,7 @@ RUN set -x && \
     ## django-admin startproject ${PROJECT_NAME}
 
 # Djangoプロジェクトの作成
-COPY ./kubernetes/docker_dev/my_setting.py /root/${PROJECT_NAME}/${PROJECT_NAME}/
+COPY ./kubernetes/docker_dev/my_setting.py /root/
 COPY ./kubernetes/docker_dev/startup.sh /root/
 RUN set -x && \
     useradd admin -G root && \

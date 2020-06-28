@@ -2,10 +2,8 @@
 ALLOWED_HOSTS = ['*']
 
 import os
-import pymysql
 import subprocess
 
-pymysql.install_as_MySQLdb()
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.mysql',

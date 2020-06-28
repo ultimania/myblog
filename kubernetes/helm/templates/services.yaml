@@ -9,7 +9,7 @@ spec:
     name: django-dev
   ports:
   - port: 8100
-    targetPort: 8000
+    targetPort: 8080
     protocol: TCP
     name: django-server
   - port: 8101

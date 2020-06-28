@@ -39,7 +39,7 @@ spec:
       - name: ap-server
         image: pshost01:5000/study/mydjango
         ports:
-        - containerPort: 8000
+        - containerPort: 8080
           name: django-server
         - containerPort: 8888
           name: jupyter

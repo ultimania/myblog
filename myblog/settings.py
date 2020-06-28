@@ -126,10 +126,10 @@ STATICFILES_DIRS = [
 ALLOWED_HOSTS = ['*']
 
 import os
-import pymysql
+# import pymysql
 import subprocess
 
-pymysql.install_as_MySQLdb()
+# pymysql.install_as_MySQLdb()
 
 NOTEBOOK_ARGUMENTS = [
     # exposes IP and port

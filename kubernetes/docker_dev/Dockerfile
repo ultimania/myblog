@@ -9,6 +9,7 @@ ENV PYTHON_VERSION="3.8.2"
 ENV DJANGO_VERSION="3.0.5"
 ENV PROJECT_NAME="myproject"
 ENV DB_NAME="django"
+ENV APP_REPOS="https://github.com/ultimania/myblog.git"
 RUN set -x && \
     dnf -y install mariadb-devel libffi-devel xz xz-devel git zlib-devel bzip2 bzip2-devel openssl-devel gcc make && \
     cd /usr/local/src && \
@@ -29,21 +30,21 @@ RUN set -x && \
     pip install django-filter && \
     pip install mysqlclient && \
     pip install PyMySQL && \
-    pip install uwsgi && \
-    pip install django-hamlpy && \
-    pip install mpl_finance && \
-    pip install django-widget-tweaks && \
+    pip install sphinx Pillow && \
+    ## pip install uwsgi && \
+    ## pip install django-hamlpy && \
+    ## pip install mpl_finance && \
+    ## pip install django-widget-tweaks && \
     pip install pycrypto && \
     pip install gensim && \
     pip install django-extensions && \
     pip install jupyterlab && \
-    django-admin startproject ${PROJECT_NAME}
+    ## django-admin startproject ${PROJECT_NAME}
 
 # Djangoプロジェクトの作成
 COPY ./kubernetes/docker_dev/my_setting.py /root/${PROJECT_NAME}/${PROJECT_NAME}/
 COPY ./kubernetes/docker_dev/startup.sh /root/
 RUN set -x && \
-    cat ~/${PROJECT_NAME}/${PROJECT_NAME}/my_setting.py >> ~/${PROJECT_NAME}/${PROJECT_NAME}/settings.py && \
     useradd admin -G root && \
     chmod 777 /root/startup.sh
 ENV DB_HOST="django-dev"

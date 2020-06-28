@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'BlogManager',
     'AccountManager',
-    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

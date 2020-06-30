@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blogs.migrations package &#8212; blogs  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="blogs package" href="blogs.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="blogs-migrations-package">
+<h1>blogs.migrations package<a class="headerlink" href="#blogs-migrations-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-blogs.migrations.0001_initial">
+<span id="blogs-migrations-0001-initial-module"></span><h2>blogs.migrations.0001_initial module<a class="headerlink" href="#module-blogs.migrations.0001_initial" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="blogs.migrations.0001_initial.Migration">
+<em class="property">class </em><code class="sig-prename descclassname">blogs.migrations.0001_initial.</code><code class="sig-name descname">Migration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">app_label</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/blogs/migrations/0001_initial.html#Migration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#blogs.migrations.0001_initial.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="py attribute">
+<dt id="blogs.migrations.0001_initial.Migration.dependencies">
+<code class="sig-name descname">dependencies</code><em class="property"> = []</em><a class="headerlink" href="#blogs.migrations.0001_initial.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="blogs.migrations.0001_initial.Migration.initial">
+<code class="sig-name descname">initial</code><em class="property"> = True</em><a class="headerlink" href="#blogs.migrations.0001_initial.Migration.initial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="blogs.migrations.0001_initial.Migration.operations">
+<code class="sig-name descname">operations</code><em class="property"> = [&lt;CreateModel  name='MediaTr', fields=[('id', &lt;django.db.models.fields.UUIDField&gt;), ('file', &lt;django.db.models.fields.files.FileField&gt;)]&gt;, &lt;CreateModel  name='TopicsTr', fields=[('id', &lt;django.db.models.fields.UUIDField&gt;), ('title', &lt;django.db.models.fields.CharField&gt;), ('created_at', &lt;django.db.models.fields.DateTimeField&gt;), ('last_update', &lt;django.db.models.fields.DateTimeField&gt;), ('isdraft', &lt;django.db.models.fields.BooleanField&gt;), ('thumbnail', &lt;django.db.models.fields.BigIntegerField&gt;), ('text', &lt;django.db.models.fields.TextField&gt;), ('likes', &lt;django.db.models.fields.IntegerField&gt;)]&gt;, &lt;CreateModel  name='CommentTr', fields=[('id', &lt;django.db.models.fields.UUIDField&gt;), ('author', &lt;django.db.models.fields.CharField&gt;), ('text', &lt;django.db.models.fields.TextField&gt;), ('created_at', &lt;django.db.models.fields.DateTimeField&gt;), ('topic', &lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;]</em><a class="headerlink" href="#blogs.migrations.0001_initial.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-blogs.migrations">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-blogs.migrations" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">blogs</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="blogs.html">blogs package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="blogs.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">blogs.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-blogs.migrations.0001_initial">blogs.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-blogs.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#module-blogs.admin">blogs.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#module-blogs.apps">blogs.apps module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#module-blogs.forms">blogs.forms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#module-blogs.models">blogs.models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#module-blogs.tests">blogs.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#blogs-urls-module">blogs.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#module-blogs.utils">blogs.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#blogs-views-module">blogs.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogs.html#module-blogs">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="blogs.html">blogs package</a><ul>
+      <li>Previous: <a href="blogs.html" title="previous chapter">blogs package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/blogs.migrations.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

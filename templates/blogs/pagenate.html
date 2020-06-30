@@ -1,0 +1,29 @@
+<div class='pagenater'>
+    <ul class="pagination modal-3">
+        {% if page_obj.has_previous %}
+            <li class="prev">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for link_page in page_obj.paginator.page_range %}
+            {% if link_page <= page_obj.number|add:5 and link_page >= page_obj.number|add:-5 %}
+                {% if link_page == page_obj.number %}
+                    <li><a class="active" href="#">{{ link_page }}</a></li>
+                {% else %}
+                    <li><a href="?page={{ link_page }}">{{ link_page }}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li class="next">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

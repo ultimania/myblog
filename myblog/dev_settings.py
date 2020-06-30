@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'BlogManager',
-    'AccountManager',
+    'blogs',
+    'myauth',
     'widget_tweaks',
 ]
 

@@ -1,0 +1,15 @@
+<div id="index_top">
+    <div id="top_catch">
+        {% include 'blogs/catch.html' %}
+    </div>
+    <div class="pick_up effect">
+        <div id="content_title"> {{ content_title }} </div>
+        <ul>
+            {% for digest in model_data %}
+            <li class="effect d_02">
+                {% include 'blogs/digest.html' %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

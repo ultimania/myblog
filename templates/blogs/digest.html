@@ -1,0 +1,10 @@
+{% load static %}
+<a href="{% url 'blog:topic' digest.id %}">
+    <!-- <span class="balloon">NEW!</span> -->
+    <img src="{% static "blogs/img/digest_sample.jpg" %}" alt="サンプルイメージ">
+    <span class="digest_title"> {{ digest.title }} </span>
+    <span class="digest_text"> {{ digest.text }} </span>
+    <span class="digest_date"> {{ digest.created_at }} </span>
+    <span class="digest_likes"> {{ digest.likes }} いいね</span>
+    <span class="btn_check"><i class="fas fa-arrow-right"></i>続きを読む</span>
+</a>

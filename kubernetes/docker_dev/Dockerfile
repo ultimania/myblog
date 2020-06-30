@@ -28,16 +28,16 @@ RUN set -x && \
     pip install django==${DJANGO_VERSION} && \
     pip install django-filter && \
     pip install mysqlclient && \
-    ## pip install PyMySQL && \
     pip install sphinx Pillow && \
-    ## pip install uwsgi && \
-    ## pip install django-hamlpy && \
-    ## pip install mpl_finance && \
-    ## pip install django-widget-tweaks && \
     pip install pycrypto && \
     pip install gensim && \
     pip install django-extensions && \
     pip install jupyterlab
+    pip install django-widget-tweaks && \
+    ## pip install uwsgi && \
+    ## pip install django-hamlpy && \
+    ## pip install mpl_finance && \
+    ## pip install PyMySQL && \
     ## django-admin startproject ${PROJECT_NAME}
 
 # Djangoプロジェクトの作成

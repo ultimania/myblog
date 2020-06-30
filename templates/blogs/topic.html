@@ -1,0 +1,17 @@
+{% extends 'blogs/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="index_top" class="post">
+    <div id="top_catch">
+        {% include 'blogs/catch.html' %}
+    </div>
+    <div class="pick_up effect">
+        <div id="content_title"> {{ model_data.title }} </div>
+        <div class="form_area" id="content">
+            {{ model_data.text|safe }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -7,7 +7,6 @@ from django.core.validators import FileExtensionValidator
 class TopicsTr(models.Model):
 
     class Meta:
-        abstract = True  # specify this model as an Abstract Model    
         app_label = 'blogs'
 
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -23,7 +22,6 @@ class TopicsTr(models.Model):
 class MediaTr(models.Model):
 
     class Meta:
-        abstract = True  # specify this model as an Abstract Model    
         app_label = 'blogs'
 
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -37,7 +35,6 @@ class MediaTr(models.Model):
 class CommentTr(models.Model):
 
     class Meta:
-        abstract = True  # specify this model as an Abstract Model    
         app_label = 'blogs'
 
     id              = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

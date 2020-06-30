@@ -20,7 +20,6 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.contenttypes.models.ContentType',
     'blogs',
     'myauth',
     'django.contrib.admin',

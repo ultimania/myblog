@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include(('myauth.urls', 'accounts'),)),
     path('blog/', include(('blogs.urls', 'blog'),)),
+    path('dashboard/', include(('dashboard.urls', 'dashboard'),)),
 ]
 
 if settings.DEBUG:

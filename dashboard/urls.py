@@ -1,13 +1,16 @@
 from django.urls import path, include
-from blogs import views
+from . import views
 
 urlpatterns = [
-    path('', views.HomeView.as_view()),
-    path('home/', views.HomeView.as_view(), name='home'),
-    path('search/', views.SearchView.as_view(), name='search'),
-    path('list/', views.BlogBaseView.as_view(), name='list'),
-    path('drafts/', views.DraftsView.as_view(), name='drafts'),
-    path('post/', views.PostView.as_view(), name='post'),
-    path('topic/<uuid:pk>', views.TopicView.as_view(), name='topic'),
-    path('upload', views.UploadView.as_view(), name='upload'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('signin/', views.SigninView.as_view(), name='signin'),
+    path('signout/', views.SignoutView.as_view(), name='signout'),
+    path('signup/', views.SignupView.as_view(), name='signup'),
+    path('signup/done', views.SignupDoneView.as_view(), name='signup_done'),
+    path('signup/complete/<token>/', views.SignupCompleteView.as_view(), name='signup_complete'),
+    path('list/', views.ListView.as_view(), name='list'),
+    path('edit/', views.EditView.as_view(), name='edit'),
+    path('update/<uuid:pk>', views.UpdateView.as_view(), name='update'),
+    path('delete/<uuid:pk>', views.DeleteView.as_view(), name='delete'),
+    path('result/', views.ResultView.as_view(), name='result'),
 ]

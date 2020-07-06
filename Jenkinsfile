@@ -23,7 +23,7 @@ podTemplate(
         }
       }
       stage('Image Build & Push by skaffold') {
-        git 'https://github.com/ultimania/myblog'
+        git url: 'https://github.com/ultimania/myblog', branch: 'dashboard'
         container('skaffold-insider') {
           sh """
             docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW

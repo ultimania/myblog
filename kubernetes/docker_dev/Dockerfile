@@ -32,8 +32,8 @@ RUN set -x && \
     pip install pycrypto && \
     pip install gensim && \
     pip install django-extensions && \
-    pip install jupyterlab
-    pip install django-widget-tweaks && \
+    pip install jupyterlab && \
+    pip install django-widget-tweaks
     ## pip install uwsgi && \
     ## pip install django-hamlpy && \
     ## pip install mpl_finance && \

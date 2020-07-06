@@ -1,19 +1,13 @@
 $(function() {
-    // Bootstrap
-    $('#bootstrap-editor').wysihtml5();
+    // remove form validation
+    $('form').find('textarea').removeAttr('required max min maxlength pattern');
 
-    // Ckeditor standard
-    $( 'textarea#ckeditor_standard' ).ckeditor({width:'98%', height: '150px', toolbar: [
-		{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-		[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
-		{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
-	]});
-    $( 'textarea#ckeditor_full' ).ckeditor({width:'98%', height: '150px'});
 });
 
 // Tiny MCE
 tinymce.init({
-    selector: "#tinymce_basic",
+    selector: "textarea#id_text",
+    language: "ja",
     plugins: [
         "advlist autolink lists link image charmap print preview anchor",
         "searchreplace visualblocks code fullscreen",

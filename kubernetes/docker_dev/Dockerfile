@@ -29,11 +29,14 @@ RUN set -x && \
     pip install django-filter && \
     pip install mysqlclient && \
     pip install sphinx Pillow && \
-    pip install pycrypto && \
+    pip install PyCryptodome && \
     pip install gensim && \
     pip install django-extensions && \
     pip install jupyterlab && \
-    pip install django-widget-tweaks
+    pip install django-widget-tweaks && \
+    pip install google-api-python-client && \
+    pip install oauth2client && \
+    pip install djangorestframework
     ## pip install uwsgi && \
     ## pip install django-hamlpy && \
     ## pip install mpl_finance && \
